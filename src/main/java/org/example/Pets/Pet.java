@@ -4,12 +4,13 @@ package org.example.Pets;
 
 import org.example.Humans.Family;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class Pet {
+public abstract class Pet implements Serializable {
     private Species species ;
     private String nickname;
     private int age;

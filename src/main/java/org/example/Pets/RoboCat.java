@@ -1,6 +1,8 @@
 package org.example.Pets;
 
-public class RoboCat extends Pet{
+import java.io.Serializable;
+
+public class RoboCat extends Pet implements Serializable {
     private Species species = Species.RoboCat;
     public RoboCat( String nickname) {
         super( nickname);

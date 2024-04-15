@@ -26,18 +26,7 @@ public interface FamilyDao {
     public Family getFamilyById(int familyIndex);
     public Set<Pet> getPets (int numberOfPets);
     public void addPet (int familyIndex , Pet pet);
-    //public void loadData ();
+    public void loadListToDB (List<Family> families);
     public void loadDataBaseFromFile();
-
-
-
-
-
-
-
-
-
-
-
-
+    public void saveDataBaseToFile();
 }

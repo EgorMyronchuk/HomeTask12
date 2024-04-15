@@ -30,7 +30,6 @@ public class CollectionFamilyDao implements FamilyDao{
     @Override
     public boolean deleteFamily(int familyIndex) {
         if (familyIndex >= 0 && familyIndex < dataBase.size()) {
-            saveDataBaseToFile();
             dataBase.remove(familyIndex);
             return true;
         }
@@ -39,7 +38,6 @@ public class CollectionFamilyDao implements FamilyDao{
 
     @Override
     public boolean deleteFamily(Family family) {
-        saveDataBaseToFile();
         return dataBase.remove(family);
     }
 
@@ -51,7 +49,7 @@ public class CollectionFamilyDao implements FamilyDao{
         else {
             dataBase.add(family);
         }
-        saveDataBaseToFile();
+
     }
 
     @Override
@@ -150,11 +148,21 @@ public class CollectionFamilyDao implements FamilyDao{
     public void addPet(int familyIndex, Pet pet) {
         dataBase.get(familyIndex).setPet(pet);
     }
-    private void saveDataBaseToFile() {
-        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("File.txt"))) {
-            oos.writeObject(dataBase); // Сериализуем коллекцию в файл
+    public void saveDataBaseToFile() {
+        try {
+            // Удаление файла перед записью данных
+            File file = new File("File.txt");
+            if (file.exists()) {
+                file.delete(); // Удаляем существующий файл
+            }
+
+            // Создание нового файла и запись данных в него
+            try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("File.txt"))) {
+                oos.writeObject(dataBase); // Сериализуем коллекцию в файл
+                System.out.println("Дані вдало збережені у файл.");
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Не вдалося зберегти дані у файл: " + e.getMessage());
         }
     }
     public void loadDataBaseFromFile() {
@@ -163,16 +171,18 @@ public class CollectionFamilyDao implements FamilyDao{
             try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream("File.txt"))) {
                 Object obj = ois.readObject();
                 if (obj instanceof List) {
-                    List<?> loadedData = (List<?>) obj;
-                    for (Object item : loadedData) {
-                        if (item instanceof Family) {
-                            dataBase.add((Family) item);
-                        }
-                    }
+                    List<Family> loadedData = (List<Family>) obj;
+                    dataBase.addAll(loadedData);
+                    System.out.println("Дані вдало збережені у файл.");
                 }
             } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Не правильно задані файли або файл пустий");
+                System.out.println("Помилка при завнтажені інформації з файлу: " + e.getMessage());
             }
+        } else {
+            System.out.println("Файл не створений абл пустий.");
         }
+    }
+    public void loadListToDB (List<Family> families){
+        dataBase.addAll(families);
     }
 }

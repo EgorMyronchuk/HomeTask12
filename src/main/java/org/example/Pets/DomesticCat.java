@@ -1,6 +1,8 @@
 package org.example.Pets;
 
-public class DomesticCat extends Pet implements Fouling {
+import java.io.Serializable;
+
+public class DomesticCat extends Pet implements Fouling , Serializable {
 
     public DomesticCat( String nickname) {
         super(nickname);

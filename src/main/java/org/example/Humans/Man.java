@@ -2,9 +2,10 @@ package org.example.Humans;
 
 import org.example.Pets.Pet;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public final class Man extends Human{
+public final class Man extends Human implements Serializable {
 
     public Man(String name, String surname, long birthDate) {
         super(name , surname , birthDate);

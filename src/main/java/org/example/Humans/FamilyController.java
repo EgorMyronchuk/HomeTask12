@@ -78,4 +78,7 @@ public class FamilyController {
     public void deleteFamilyByIndex (int familyIndex){
         familyService.deleteFamilyByIndex(familyIndex);
     }
+    public void loadDataBaseFromFile() {familyService.loadDataBaseFromFile();}
+    public void loadListToDB (List<Family> families){familyService.loadListToDB(families);}
+    public void saveDataBaseToFile() {familyService.saveDataBaseToFile();}
 }

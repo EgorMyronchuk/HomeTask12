@@ -36,7 +36,6 @@ public class Main {
                         familyController.getFamilyById(0).addChild(child1);
                         Man father2 = new Man("Evgen", "Brazilia", "01/10/2004", 12);
                         Woman mother2 = new Woman("Lena", "Kyky", "02/10/2004", 15);
-                        System.out.println(mother2.prettyFormat());
                         familyController.createNewFamily(mother2, father2);
                     }
                     break;
@@ -117,8 +116,37 @@ public class Main {
                     case 9:{
                         System.out.println("Старше якого віку ви хочите видалити дітей?");
                         familyController.deleteAllChildrenOlderThan(Integer.parseInt(scanner.nextLine().trim()));
+                        break;
+                    }
+                    case 10:{
+                        familyController.saveDataBaseToFile();
+                        break;
+                    }
+                    case 11:{
+                        familyController.loadDataBaseFromFile();
+                        break;
+                    }
+                    case 12:  // Не зовсім зрозумів цей пункт і чи потрібно його сюди додавати . Я зрозумів це так :
+                    {
+                        System.out.println("Заповнюємо лист сімей щоб його додати");
+                        List<Family> temp = new ArrayList<>();
+                        boolean exit = true;
+                        while (true){
+                            System.out.println("Ви хочите додати сім'ю у списко (Так/Ні)");
+                            if (scanner.nextLine().trim().toLowerCase().charAt(0) == 'т'){
+                                Woman motherForLoad = (Woman) createPerson("матері");
+                                Man fatherForLoad = (Man) createPerson("батька");
+                                Family fam = new Family(motherForLoad , fatherForLoad);
+                                temp.add(fam);
+                            }
+                            else {
+                                break;
+                            }
+                        }
+                        familyController.loadListToDB(temp);
                     }
                 }
+
 
 
             } catch (NumberFormatException e) {
@@ -150,6 +178,9 @@ public class Main {
         menu.append("- 7. Видалити сім'ю за індексом сім'ї у загальному списку\n");
         menu.append("- 8. Редагувати сім'ю за індексом сім'ї у загальному списку\n");
         menu.append("- 9. Видалити всіх дітей старше віку\n");
+        menu.append("- 10.Завантажити файли на комп'ютер\n");
+        menu.append("- 11.Завантажити раніше збережені дані\n");
+        menu.append("- 12.Додати лист у нашу базу даних\n");
 
         return menu.toString();
     }

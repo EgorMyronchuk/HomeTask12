@@ -1,6 +1,8 @@
 package org.example.Pets;
 
-public enum Species {
+import java.io.Serializable;
+
+public enum Species implements Serializable {
     Dog,
     RoboCat,
     Fish,

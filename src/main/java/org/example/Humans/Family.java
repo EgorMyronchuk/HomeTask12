@@ -3,9 +3,10 @@ package org.example.Humans;
 
 import org.example.Pets.Pet;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Family {
+public class Family implements Serializable {
     Woman mother;
     Man father;
     List<Human> children = new ArrayList<>();

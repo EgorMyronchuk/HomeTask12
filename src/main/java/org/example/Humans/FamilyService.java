@@ -2,6 +2,9 @@ package org.example.Humans;
 
 import org.example.Pets.Pet;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.List;
 import java.util.Set;
 
@@ -55,4 +58,7 @@ public class FamilyService {
     public void deleteFamilyByIndex (int familyIndex){
         familyDao.deleteFamily(familyIndex);
     }
+    public void loadDataBaseFromFile(){familyDao.loadDataBaseFromFile();}
+    public void loadListToDB (List<Family> families){familyDao.loadListToDB(families);}
+    public void saveDataBaseToFile() {familyDao.saveDataBaseToFile();};
 }
